@@ -1,0 +1,24 @@
+.main{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 0;
+    background-color: whitesmoke;
+    overflow: auto;
+    width: 100%;
+    position: relative;
+    height: 89vh;
+    top: 4.5rem;
+    
+}
+
+#dark .main{
+    background-color: #01264b;
+}
+
+#light .main{
+    background-color: whitesmoke;
+}
+
+.main_content{
+    padding: 20px;
+}

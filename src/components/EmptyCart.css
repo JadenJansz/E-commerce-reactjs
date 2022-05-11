@@ -1,0 +1,27 @@
+
+.emptyCart{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 0;
+    padding: 20px;
+    background-color: whitesmoke;
+    overflow:auto;
+    width: 100%;
+    position: relative;
+    height: 80vh;
+    top: 4.5rem;
+    align-items: center;
+    
+}
+
+#dark .emptyCart{
+    background-color: #294c6c;
+    color: white;
+}
+
+.emptyCart-button{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    padding: 70px;
+}

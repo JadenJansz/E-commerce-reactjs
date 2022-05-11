@@ -1,0 +1,39 @@
+.sidebarOptions-unselected{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    cursor: pointer;
+    background-color: rgb(197, 196, 196);
+    color: black;
+}
+
+.sidebarOptions{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    cursor: pointer;
+    background-color: whitesmoke;
+    
+}
+
+#light .sidebarOptions{
+    background-color: whitesmoke;
+}
+
+#dark .sidebarOptions{
+    background-color: #294c6c;
+    color: rgb(185, 181, 181);
+}
+
+#dark .sidebarOptions:hover, .sidebarOptions--active{
+    background-color: #01264b;
+    color: white;
+}
+#light .sidebarOptions:hover, .sidebarOptions--active{
+    background-color: rgb(197, 196, 196);
+    color: black;
+}

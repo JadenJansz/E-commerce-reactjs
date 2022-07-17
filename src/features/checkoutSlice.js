@@ -5,7 +5,9 @@ export const checkoutSlice = createSlice({
     initialState: [],
     reducers: {
         fetchDetails: (state, action) => {
-            state.push(action.payload);
+            state = action.payload
+
+            return state;
         }
     }
 });

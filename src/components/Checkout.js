@@ -47,7 +47,7 @@ const Checkout = () => {
   
   
   const onSubmit = data => {
-    //console.log(data);
+    console.log(data);
     
     navigate('/payment');
     dispath(fetchDetails(data));

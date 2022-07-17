@@ -20,6 +20,7 @@ import { auth } from './components/firebase';
 import { login } from './features/userSlice';
 import { changeTheme } from './features/themeSlice';
 import Confirmation from './components/Confirmation';
+import Modal from './components/Modal';
 
 export const ThemeContext = createContext(null);
 
@@ -29,6 +30,7 @@ const App = () => {
 
   //const [category, setCategory] = useState([]);
   // const [cart, setCart] = useState([]);
+  const [modal, setModal] = useState(false)
 
   const category = useSelector((state) => state.category.selectedCategory)
   const cart = useSelector((state) => state.cart)
@@ -63,53 +65,12 @@ const App = () => {
         )
       }
     })
+
   }, [])
 
-  // const handleAddToCart = (product) => {
-  //     const exist = cart.find((x) => x.id === product.id);
-
-  //     if(exist){
-  //         setCart(
-  //             cart.map((x) => 
-  //               x.id === product.id ? { ...exist, qty: exist.qty + 1} : x
-  //           )
-  //         )
-          
-  //     }else{
-  //       setCart([...cart, {...product, qty: 1}]);
-        
-  //     }
-
-  //     console.log(exist);
-  // }
-
-  // const handleUpdateCart = (operation, id) => {
-  //   const exist = cart.find((x) => x.id === id);
-
-  //     if(operation === 'Add'){
-  //         setCart(
-  //             cart.map((x) => 
-  //                 x.id === id ? {...x, qty: x.qty + 1} : x
-  //             )
-  //         )
-  //     }else if(operation === 'Reduce'){
-  //         (exist.qty === 1 ? setCart(cart.filter((x) => x.id !== id )) : 
-          
-  //         setCart(
-  //           cart.map((x) => 
-  //               x.id === id ? {...x, qty: x.qty - 1} : x
-  //           )
-  //          )
-  //         )
-  //     }else if(operation === 'Remove'){
-  //         setCart(cart.filter((x) => x.id !== id ))
-  //     }
-  // }
-
-  // const handleDeleteCart = () => {
-  //   setCart([]);
-  // }
- 
+  const closeModal = () => {
+    setModal(true)
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -122,8 +83,9 @@ const App = () => {
   
       <Route path='/' element={<>
                                 <Header cart={cart} />
-                                <Sidebar />
+                                <Sidebar closeModal={closeModal}/>
                                 <Main   /> 
+                                {modal && <Modal setModal={setModal}/>}
                               </>} />
       
       <Route path='/cart' element={cart.length === 0 ? 

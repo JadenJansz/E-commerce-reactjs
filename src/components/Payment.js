@@ -14,8 +14,9 @@ import { changeTheme } from '../features/themeSlice';
 import firebase from 'firebase/compat/app';
 
 import cartImage from '../images/786686.png'
+import { deleteCart } from '../features/cartSlice';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
+const stripePromise = loadStripe("pk_test_51KZK2DFNOU5H46UrKf02FBa0eXC89r5zWl9rBcrbKHlKq5Jbr7Vkp9koQQLmBdVj3I8LS5feDQfXvy3V3ZeZThKY004LY3W8jd")
 
 const Payment = () => {
 
@@ -23,6 +24,8 @@ const Payment = () => {
   const user = useSelector((state) => state.user.user);
   const theme = useSelector(state => state.theme);
   const checkout = useSelector(state => state.checkout);
+
+  const dispatch = useDispatch();
 
   const cartItems = [];
 
@@ -41,7 +44,7 @@ const Payment = () => {
   
   const navigate = useNavigate();
 
-  console.log(cart)
+  //console.log(cart)
 
   const [subTotal, setSubTotal] = useState(0);
 
@@ -61,9 +64,9 @@ const Payment = () => {
 
       if(!stripe || !elements) return;
 
-      const cardElements = elements.getElement(CardElement);
+      const cardElement = elements.getElement(CardElement);
 
-      const { error, paymentMethod} = await stripe.createPaymentMethod({ type:'card', card: CardElement })
+      const { error, paymentMethod} = await stripe.createPaymentMethod({ type:'card', card: cardElement })
 
       if(error){
         console.log(error);
@@ -77,6 +80,8 @@ const Payment = () => {
             cart: cartItems,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
+
+        dispatch(deleteCart())
 
           navigate('/confirmation');
         }

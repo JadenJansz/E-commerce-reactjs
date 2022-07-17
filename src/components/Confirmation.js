@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Avatar, Button, IconButton, Switch } from '@material-ui/core'
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { changeTheme } from '../features/themeSlice'
 import { useDispatch, useSelector } from 'react-redux';
 
 import cartImage from '../images/786686.png'
+import { deleteCart } from '../features/cartSlice';
 
 const Confirmation = () => {
 
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const user = useSelector((state) => state.user.user);
     const theme = useSelector(state => state.theme);
     const checkout = useSelector(state => state.checkout);
+
 
   return (
     <>
@@ -27,7 +30,7 @@ const Confirmation = () => {
             <h4>E - commerce</h4>
         </div>
         <div className='checkout_header_right'>
-        <Brightness4Icon /><Switch onChange={() => dispath(changeTheme())} edge='start' color='default' />
+        <Brightness4Icon /><Switch onChange={() => dispatch(changeTheme())} edge='start' color='default' />
         <p style={{ fontSize:'small' }} >Welcome : {user?.displayName}</p>
             <IconButton>
                 <Avatar src={user?.photoUrl} />
@@ -36,8 +39,8 @@ const Confirmation = () => {
       </div>
       <div className='payment_main' id={theme} >
         <h1>Checkout</h1>
-        <h3>Thank you for your purchase {checkout.name}!</h3><br/><hr style={{width:'100%'}} /><br />
-        <Button variant='contained' color='primary'>Back To Home</Button>
+        <h3>Thank you for your purchase {`${checkout.firstName} ${checkout.lastName}`}!</h3><br/><hr style={{width:'100%'}} /><br />
+        <Button variant='contained' color='primary' onClick={() => navigate('/')}>Back To Home</Button>
       </div>
     </>
   )
